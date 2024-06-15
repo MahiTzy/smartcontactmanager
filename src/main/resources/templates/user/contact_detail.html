@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{user/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+
+<body>
+    <section>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center">Contact Detail</h1>
+                <div class="container-fluid mt-1">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Second Name</th>
+                                        <th>Email</th>
+                                        <th>Work</th>
+                                        <th>Phone</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td th:text="${contact.cId}"></td>
+                                        <td th:text="${contact.name}"></td>
+                                        <td th:text="${contact.secondName}"></td>
+                                        <td>
+                                            <a th:href="@{'/user/'+${contact.cId}+'/contact'}" th:text="${contact.email}"></a>
+                                        </td>
+                                        <td th:text="${contact.work}"></td>
+                                        <td th:text="${contact.phone}"></td>
+                                        <td><img th:src="@{'/img/'+${contact.image}}" width="50px" height="50px" /></td>
+                                        <td th:utext="${contact.description}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{user/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+</head>
+
+<body>
+    <section>
+        <div class="alert" role="alert" th:if="${session.message}" th:classappend="${session.message.type}">
+            <p th:text="${session.message.content}"></p>
+            <div th:text="${@sessionUtilityBean.removeVerificationMessageFromSession()}"></div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center">Add Contact</h1>
+                <div class="container-fluid mt-1">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <form class="row g-3" th:action="@{/user/process-contact}" th:object="${contact}"
+                                enctype="multipart/form-data" method="post">
+                                <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="inputFirstName" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="inputLastName" name="secondName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputEmail4" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="inputEmail4" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputCompany" class="form-label">Work</label>
+                                    <input type="text" class="form-control" id="inputCompany" name="work" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputPhone" class="form-label">Phone</label>
+                                    <input type="text" class="form-control" id="inputPhone" name="phone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputImage" class="form-label">Image</label>
+                                    <input class="form-control" type="file" id="inputImage" name="inputImage">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress" class="form-label">Description</label>
+                                    <textarea class="form-control" id="inputAddress" placeholder="Enter Descriotion"
+                                        name="description"></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Add Contact</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.tiny.cloud/1/1lncjpyqak1objxximogni4srjt49a662ikhdj954sdlpq02/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+              selector: 'textarea',
+              plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Author name',
+              mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+              ],
+              ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            });
+          </script>
+    </section>
+</body>
+
+</html>

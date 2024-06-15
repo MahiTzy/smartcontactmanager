@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+</head>
+
+<body>
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class="content text-center">
+            <div class="card text-center" style="width: 400px;">
+                <div class="alert" role="alert" th:if="${session.message}" th:classappend="${session.message.type}">
+                    <p th:text="${session.message.content}"></p>
+                    <div th:text="${@sessionUtilityBean.removeVerificationMessageFromSession()}"></div>
+                </div>
+                <div class="card-header h5 text-white bg-primary">Password Reset</div>
+                <div class="card-body px-5">
+                    <form th:action="@{/sendotp}" method="POST">
+                        <p class="card-text py-2">
+                            Enter your email address and we'll send you an email with instructions to reset your
+                            password.
+                        </p>
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="email" id="typeEmail" name="email" class="form-control my-3" required />
+                            <label class="form-label" for="typeEmail">Email input</label>
+                        </div>
+                        <button type="submit" data-mdb-ripple-init class="btn btn-primary w-100">Send OTP</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
