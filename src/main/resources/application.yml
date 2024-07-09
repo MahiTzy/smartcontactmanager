@@ -15,7 +15,7 @@ spring:
             max-request-size: 10MB
     mail:
         host: smtp.gmail.com
-        password: APP_PASSWORD 
+        password: SECRET 
         port: 587
         properties:
             mail:
@@ -25,7 +25,26 @@ spring:
                         trust: smtp.gmail.com
                     starttls:
                         enable: true
-        username: USERNAME
-# stripe:
-#     api:
-#         key: sk_test
+        username: ID
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-name: Google
+                        client-id: ID
+                        client-secret: SECRET
+                        scope:
+                            - email
+                            - profile
+                    github:
+                        client-name: GitHub
+                        client-id: ID
+                        client-secret: SECRET
+                        scope:
+                            - user:email
+                            - read:user
+cloudinary:
+    cloud.name: CLOUD_NAME
+    api.key: ID
+    api.secret: SECRET

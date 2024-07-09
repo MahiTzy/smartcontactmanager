@@ -57,7 +57,7 @@
                                         </td>
                                         <td th:text="${contact.work}"></td>
                                         <td th:text="${contact.phone}"></td>
-                                        <td><img th:src="@{'/img/'+${contact.image}}" width="50px" height="50px" /></td>
+                                        <td><img th:src="${contact.imageUrl}" width="50px" height="50px" /></td>
                                         <td th:utext="${contact.description}"></td>
                                         <td>
                                             <a th:href="@{'/user/edit-contact/'+${contact.cId}}"

@@ -18,6 +18,9 @@ public interface ContactRepo extends JpaRepository<Contact, Integer> {
     @Query("from Contact as c where c.user.id = :userId")
     public Page<Contact> findContactByUser(@Param("userId") int userId, Pageable pageable);
 
-    @Query("SELECT c FROM Contact c WHERE (c.name LIKE :name OR c.secondName LIKE :name) AND c.user = :user")
-    List<Contact> findByNameContainingAndUser(@Param("name") String name, @Param("user") User user);
+    @Query("from Contact as c where (c.name LIKE :name OR c.secondName LIKE :name) AND c.user = :user")
+    List<Contact> findByNameAndUserContaining(@Param("name") String name, @Param("user") User user);
+
+    @Query("from Contact as c where (c.phone LIKE :phone) AND c.user = :user")
+    List<Contact> findByPhoneAndUserContaining(String phone, User user);
 }

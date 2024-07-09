@@ -56,7 +56,7 @@ public class HomeController {
 
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result,
-            @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model model,
+            @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, @RequestParam("repeatpassword") String repeatpassword, Model model,
             HttpSession session) {
         try {
             if (!agreement) {
@@ -67,6 +67,12 @@ public class HomeController {
                 System.out.println("ERROR: " + result.toString());
                 model.addAttribute("user", user);
                 return "signup";
+            }
+            if(this.userRepo.getUserByUserName(user.getEmail()) != null) {
+                throw new Exception("User with this email already exists");
+            }
+            if(!user.getPassword().equals(repeatpassword)) {
+                throw new Exception("Passwords do not match");
             }
             user.setRole("ROLE_USER");
             user.setEnabled(true);
@@ -80,7 +86,7 @@ public class HomeController {
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("user", user);
-            session.setAttribute("message", new Message("Something went wrong !!" + e.getMessage(), "alert-danger"));
+            session.setAttribute("message", new Message("Something went wrong !! " + e.getMessage(), "alert-danger"));
             return "signup";
         }
         return "signup";

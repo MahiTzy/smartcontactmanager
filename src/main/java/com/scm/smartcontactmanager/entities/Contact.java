@@ -23,17 +23,31 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString(exclude = "user")
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private int cId;
+
     private String name;
+
     private String secondName;
+
     private String work;
+
     private String email;
+
     private String phone;
-    private String image;
+
+    private String imageUrl;
+
+    private boolean favourite;
+
+    private String publicId;
+
     @Column(length = 5000)
     private String description;
+    
     @ManyToOne
     @JsonIgnore
     private User user;

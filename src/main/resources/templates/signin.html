@@ -20,16 +20,18 @@
                             </div>
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
-                                    <div class="alert" role="alert" th:if="${session.message}" th:classappend="${session.message.type}">
+                                    <div class="alert" role="alert" th:if="${session.message}"
+                                        th:classappend="${session.message.type}">
                                         <p th:text="${session.message.content}"></p>
-                                        <div th:text="${@sessionUtilityBean.removeVerificationMessageFromSession()}"></div>
+                                        <div th:text="${@sessionUtilityBean.removeVerificationMessageFromSession()}">
+                                        </div>
                                     </div>
 
                                     <form action="/login" method="post">
 
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                            <span class="h1 fw-bold mb-0">Logo</span>
+                                            <span class="h1 fw-bold mb-0">SCM</span>
                                         </div>
                                         <div th:if="${param.error}" class="alert alert-danger" role="alert">
                                             Invalid username and password.
@@ -56,11 +58,17 @@
                                         <div class="pt-1 mb-4">
                                             <button data-mdb-button-init data-mdb-ripple-init
                                                 class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                            <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-danger btn-lg btn btn-block btn-social-icon btn-google">
+                                                <span class="fa fa-google"></span> Sign in with Google
+                                            </a>
+                                            <a th:href="@{/oauth2/authorization/github}" class="btn btn-outline-primary btn-lg btn-block btn-social-icon btn-github">
+                                                <span class="fa fa-github"></span> Sign in with Github
+                                            </a>
                                         </div>
 
-                                        <a class="small text-muted" href="#!"  th:href="@{/forgot}">Forgot password?</a>
+                                        <a class="small text-muted" href="#!" th:href="@{/forgot}">Forgot password?</a>
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
-                                                href="#!" style="color: #393f81;">Register here</a></p>
+                                                th:href="@{/signup}" style="color: #393f81;">Register here</a></p>
                                         <a href="#!" class="small text-muted">Terms of use.</a>
                                         <a href="#!" class="small text-muted">Privacy policy</a>
                                     </form>
